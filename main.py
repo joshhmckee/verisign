@@ -7,6 +7,7 @@ import csv
 import json
 import ssl
 from datetime import date
+from typing import Optional
 from urllib.request import urlopen
 
 ZONE_COUNTS_URL = "https://www.verisign.com/zone-domain-counts/zone_counts.json"
@@ -30,7 +31,7 @@ def parse_counts(data: dict) -> tuple[int, int, int]:
     return com, net, total
 
 
-def get_latest_row() -> tuple[int, int, int] | None:
+def get_latest_row() -> Optional[tuple[int, int, int]]:
     """Return (com, net, total) from the last data row in data.csv, or None if empty/no data."""
     try:
         with open(DATA_CSV, "r", newline="", encoding="utf-8") as f:
